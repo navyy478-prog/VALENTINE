@@ -163,7 +163,7 @@
         </div>
         <div id="letter" class="letter-box">
             <p>My Dearest Teena,</p>
-            <p>Every single day with you feels like a blessing. You are my best friend and my heart's peace. I promise to hold your hand forever.</p>
+            <p>Every single day with you feels like a blessing. You are my life partner and my heart's peace. I promise to hold your hand forever.</p>
             <h2 style="color: #ff1361; text-align: center; margin: 15px 0;">I LOVE YOU FOREVER ❤️</h2>
             <div class="signature">Ur Navuu</div>
         </div>
