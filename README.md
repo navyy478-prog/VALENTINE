@@ -1,269 +1,229 @@
-# VALENTINE
-<Happy valentine day 🫠🫠🫠>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Teena ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Infinity Love | Teena ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff4d6d;
-            --accent: #ffb3c1;
-            --glass: rgba(255, 255, 255, 0.2);
+            --pink: #ff3366;
+            --purple: #7000ff;
+            --glass: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; touch-action: none; -webkit-tap-highlight-color: transparent; }
+        
         body {
+            background: #050505;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
             overflow: hidden;
-            background: #ffafbd; 
-            background: linear-gradient(-45deg, #ffafbd, #ffc3a0, #ff1361, #ff5f6d);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999; }
-
-        /* Floating Rose Petals */
-        .petal {
-            position: fixed;
-            background-color: #ff4d6d;
-            border-radius: 150% 0 150% 0;
-            opacity: 0.7;
-            pointer-events: none;
-            z-index: 1;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); }
-            100% { transform: translateY(110vh) rotate(360deg); }
-        }
+        /* Background Elements */
+        #bg-canvas, #fw-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        #fw-canvas { z-index: 100; pointer-events: none; }
 
         .container {
-            width: 90%;
-            max-width: 420px;
+            width: 92%; max-width: 450px;
             background: var(--glass);
-            backdrop-filter: blur(15px);
-            padding: 35px 25px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 40px; padding: 40px 25px;
+            text-align: center; display: none;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             z-index: 10;
-            display: none;
-            color: white;
-            text-align: center;
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .active { display: block; }
+        .active { display: block; animation: zoomIn 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        @keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--pink); text-shadow: 0 0 15px rgba(255,51,102,0.4); }
+        p { font-weight: 300; font-size: 0.95rem; line-height: 1.6; margin: 15px 0; opacity: 0.8; }
 
-        h1 { font-family: 'Dancing Script', cursive; font-size: 2.5rem; margin-bottom: 10px; }
-        
+        /* Timer Grid */
+        .t-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .t-box { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 15px; border: 1px solid rgba(255,51,102,0.2); }
+        .t-num { display: block; font-size: 1.2rem; font-weight: 800; color: var(--pink); }
+        .t-lbl { font-size: 0.6rem; text-transform: uppercase; opacity: 0.6; }
+
+        /* Scratch Card */
+        .sc-wrap { position: relative; width: 240px; height: 240px; margin: 20px auto; border-radius: 20px; overflow: hidden; border: 2px solid var(--pink); }
+        .sc-res { position: absolute; top:0; left:0; width:100%; height:100%; background:#111; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+        #sc-canvas { position: absolute; top:0; left:0; z-index: 2; cursor: crosshair; }
+
+        /* Buttons */
         .btn {
-            background: white;
-            color: var(--primary);
-            border: none;
-            padding: 14px 32px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background: white; color: black; border: none; padding: 18px 30px;
+            border-radius: 100px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; cursor: pointer; width: 100%; transition: 0.3s;
+            margin-top: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
+        .btn:hover { background: var(--pink); color: white; transform: translateY(-3px); }
 
-        .btn:hover { transform: scale(1.05); box-shadow: 0 15px 25px rgba(255,77,109,0.3); }
-
-        .gif-img { width: 150px; border-radius: 20px; margin-bottom: 15px; border: 4px solid white; }
-
-        .box-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
-        .gift-box { 
-            background: white; font-size: 35px; height: 80px; display: flex; align-items: center; 
-            justify-content: center; border-radius: 15px; cursor: pointer; transition: 0.3s;
+        .final-txt {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-family: 'Dancing Script', cursive; font-size: 4.5rem;
+            text-align: center; z-index: 101; display: none; text-shadow: 0 0 30px var(--pink);
         }
-        .gift-box:hover { transform: translateY(-5px) rotate(5deg); }
-
-        #no-btn { transition: 0.3s ease; }
-
-        .letter-box { background: #fff; color: #333; padding: 25px; border-radius: 20px; text-align: left; display: none; }
-        .signature { 
-            font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--primary); 
-            text-align: right; margin-top: 10px; 
-        }
-
-        #game-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,77,109,0.95); z-index:1000; }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas"></canvas>
-    <audio id="bgMusic" loop src="https://www.bensound.com/bensound-music/bensound-love.mp3"></audio>
+    <canvas id="bg-canvas"></canvas>
+    <canvas id="fw-canvas"></canvas>
+    <audio id="bgm" loop src="https://www.bensound.com/bensound-music/bensound-love.mp3"></audio>
 
     <div id="p1" class="container active">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp4Zmt4bXo2d2R4Zmt4bXo2d2R4Zmt4bXo2d2R4Zmt4bXo2dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KzM1lAfJjCW3Ic7vql/giphy.gif" class="gif-img">
-        <h1>Happy Valentine's Day Teena ❤️</h1>
-        <p>I built this little digital world for you. Want to see the magic?</p>
-        <button class="btn" onclick="next(2)">Start Journey ✨</button>
+        <h1>For You, Teena</h1>
+        <p>A journey that started 4 months ago...</p>
+        <div class="t-grid">
+            <div class="t-box"><span class="t-num" id="td-d">00</span><span class="t-lbl">Days</span></div>
+            <div class="t-box"><span class="t-num" id="td-h">00</span><span class="t-lbl">Hrs</span></div>
+            <div class="t-box"><span class="t-num" id="td-m">00</span><span class="t-lbl">Min</span></div>
+            <div class="t-box" style="grid-column: span 3;"><span class="t-num" id="td-s">00</span><span class="t-lbl">Seconds of Togetherness</span></div>
+        </div>
+        <button class="btn" onclick="startApp(2)">Open Memories 💌</button>
     </div>
 
     <div id="p2" class="container">
-        <h1>For My Soulmate</h1>
-        <p style="font-style: italic; font-size: 1.3rem; margin: 15px 0;">
-            "Aankhon ki chamak, chehre ka noor,<br>
-            Aapko dekh kar dil hota hai choor choor.<br>
-            Khuda se bas yahi maangi hai dua,<br>
-            Aap humse kabhi na hona door."
+        <h1>My Feelings</h1>
+        <p style="font-style: italic; font-size: 1.1rem;">
+            "Aapki hansi meri kamzori hai,<br>
+            Aapka saath meri zaruri hai.<br>
+            4 mahine toh bas ek shuruat hai,<br>
+            Humein bitani poori zindagi saath hai."
         </p>
-        <p>— <b>Navuddin</b></p>
-        <button class="btn" onclick="next(3)">Continue to Fun 🎁</button>
+        <button class="btn" onclick="next(3)">Next Secret ✨</button>
     </div>
 
     <div id="p3" class="container">
-        <h1>Unlock Your Hearts 🎁</h1>
-        <p>Tap a box and catch 5 hearts to reveal a message!</p>
-        <div class="box-grid">
-            <div class="gift-box" onclick="startGame(0)">🎁</div>
-            <div class="gift-box" onclick="startGame(1)">🎁</div>
-            <div class="gift-box" onclick="startGame(2)">🎁</div>
-        </div>
-        <div id="game-msg" style="background: rgba(255,255,255,0.2); padding: 10px; border-radius: 10px; min-height: 40px;"></div>
-        <button class="btn" onclick="next(4)">Ask Me Something 💍</button>
+        <h1>Love Test 🧩</h1>
+        <p>How much do you love Navuu?</p>
+        <button class="btn" style="background: rgba(255,255,255,0.1); color: white; margin-bottom: 10px;" onclick="alert('Thoda sa? Galat jawab! 😜')">Thoda sa 🤏</button>
+        <button class="btn" style="background: rgba(255,255,255,0.1); color: white; margin-bottom: 10px;" onclick="alert('Bohot saara? Thoda aur socho.. ✨')">Bohot saara! ✨</button>
+        <button class="btn" onclick="next(4)">Infinite / Jaan se zyada ❤️</button>
     </div>
 
     <div id="p4" class="container">
-        <h1>Will You Be My Valentine? 💍</h1>
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHp4Zmt4bXo2d2R4Zmt4bXo2d2R4Zmt4bXo2d2R4Zmt4bXo2dyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/c76IJLufpNwSULPk2m/giphy.gif" class="gif-img">
-        <div>
-            <button class="btn" onclick="celebrate()">YES! 😍</button>
-            <button id="no-btn" class="btn" onmouseover="moveNo()" style="background: #444; color: white;">No</button>
+        <h1>Scratch the Card</h1>
+        <p>Reveal what's in my heart...</p>
+        <div class="sc-wrap">
+            <div class="sc-res">
+                <span style="font-size: 3rem;">💍</span>
+                <p style="color:var(--pink); font-weight:800;">YOU ARE MINE!</p>
+            </div>
+            <canvas id="sc-canvas" width="240" height="240"></canvas>
         </div>
-        <p id="tease" style="margin-top: 15px; color: yellow; font-weight: bold;"></p>
+        <button id="sc-btn" class="btn" style="display:none;" onclick="next(5)">Go Ahead 🚀</button>
     </div>
 
     <div id="p5" class="container">
-        <h1>Secret Love Letter 🔐</h1>
-        <div id="lock">
-            <p style="margin-bottom: 10px;">To read the letter, enter your name:</p>
-            <button class="btn" onclick="unlock()">Unlock 🔓</button>
-        </div>
-        <div id="letter" class="letter-box">
-            <p>My Dearest Teena,</p>
-            <p>Every single day with you feels like a blessing. You are my life partner and my heart's peace. I promise to hold your hand forever.</p>
-            <h2 style="color: #ff1361; text-align: center; margin: 15px 0;">I LOVE YOU FOREVER ❤️</h2>
-            <div class="signature">Ur Navuu</div>
-        </div>
+        <h1>The Vow 💍</h1>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3h0Y2N4YnI3ZHR4Z285eDR0Z285eDR0Z285eDR0Z285eDR0ZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Lp71UqhcHh46OKH39W/giphy.gif" style="width:100%; border-radius: 20px;">
+        <p>Will you stay by my side in every up and down of life?</p>
+        <button class="btn" onclick="next(6)">Yes, Forever 😍</button>
     </div>
 
-    <div id="game-overlay">
-        <h2 style="margin-top: 20%; color:white;">Catch 5 Hearts! <span id="score">0</span>/5</h2>
+    <div id="p6" class="container">
+        <h1>Final Note 🔐</h1>
+        <div style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 20px; font-size: 0.85rem;">
+            <p>Dear Teena,</p><br>
+            <p>In 4 mahino mein aapne meri duniya badal di. Thank you for being my peace. I promise to love you more with every passing second.</p>
+            <p style="text-align: right; font-family: 'Dancing Script'; font-size: 1.5rem; color: var(--pink);">- Ur Navuu</p>
+        </div>
+        <button class="btn" style="background: var(--pink); color: white;" onclick="triggerSkyShot()">Launch Sky Shot 🎇</button>
     </div>
+
+    <div id="f-text" class="final-txt">I LOVE YOU <br> TEENA ❤️</div>
 
     <script>
-        // Rose Petals Falling
-        function createPetals() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.width = Math.random() * 15 + 10 + 'px';
-            petal.style.height = petal.style.width;
-            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
-            document.body.appendChild(petal);
-            setTimeout(() => petal.remove(), 7000);
+        // --- Timer Logic ---
+        const start = new Date(2025, 9, 24); // Year, Month(0-11), Day
+        function updateTimer() {
+            const diff = new Date() - start;
+            document.getElementById('td-d').innerText = Math.floor(diff/86400000);
+            document.getElementById('td-h').innerText = Math.floor((diff/3600000)%24);
+            document.getElementById('td-m').innerText = Math.floor((diff/60000)%60);
+            document.getElementById('td-s').innerText = Math.floor((diff/1000)%60);
         }
-        setInterval(createPetals, 300);
+        setInterval(updateTimer, 1000);
 
+        // --- Background Particles ---
+        const bCan = document.getElementById('bg-canvas');
+        const bCtx = bCan.getContext('2d');
+        bCan.width = window.innerWidth; bCan.height = window.innerHeight;
+        let pts = [];
+        for(let i=0; i<60; i++) pts.push({x:Math.random()*bCan.width, y:Math.random()*bCan.height, r:Math.random()*2, vx:Math.random()-0.5, vy:Math.random()-0.5});
+        function drawBg() {
+            bCtx.clearRect(0,0,bCan.width, bCan.height);
+            bCtx.fillStyle = "rgba(255,51,102,0.3)";
+            pts.forEach(p => {
+                p.x+=p.vx; p.y+=p.vy;
+                if(p.x<0||p.x>bCan.width) p.vx*=-1; if(p.y<0||p.y>bCan.height) p.vy*=-1;
+                bCtx.beginPath(); bCtx.arc(p.x, p.y, p.r, 0, 6.28); bCtx.fill();
+            });
+            requestAnimationFrame(drawBg);
+        }
+        drawBg();
+
+        // --- Scratch Logic ---
+        const sc = document.getElementById('sc-canvas');
+        const sCtx = sc.getContext('2d');
+        let mDown = false;
+        function initSC() {
+            sCtx.fillStyle = '#555'; sCtx.fillRect(0,0,240,240);
+            sCtx.fillStyle = '#fff'; sCtx.font = '18px Montserrat'; sCtx.textAlign='center'; sCtx.fillText('SCRATCH ME ❤️', 120, 125);
+            sCtx.globalCompositeOperation = 'destination-out';
+        }
+        function doScratch(e) {
+            if(!mDown) return;
+            const r = sc.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - r.left;
+            const y = (e.clientY || e.touches[0].clientY) - r.top;
+            sCtx.beginPath(); sCtx.arc(x, y, 30, 0, 6.28); sCtx.fill();
+            let d = sCtx.getImageData(0,0,240,240).data, c=0;
+            for(let i=3; i<d.length; i+=4) if(d[i]===0) c++;
+            if(c > 240*240*0.6) document.getElementById('sc-btn').style.display='block';
+        }
+        sc.addEventListener('mousedown', ()=>mDown=true); sc.addEventListener('touchstart', ()=>mDown=true);
+        window.addEventListener('mouseup', ()=>mDown=false); window.addEventListener('touchend', ()=>mDown=false);
+        sc.addEventListener('mousemove', doScratch); sc.addEventListener('touchmove', doScratch);
+        initSC();
+
+        // --- Sky Shot Logic ---
+        const fCan = document.getElementById('fw-canvas');
+        const fCtx = fCan.getContext('2d');
+        fCan.width = window.innerWidth; fCan.height = window.innerHeight;
+        function triggerSkyShot() {
+            document.querySelectorAll('.container').forEach(c=>c.style.display='none');
+            document.getElementById('f-text').style.display='block';
+            setInterval(()=>{
+                const x = Math.random()*fCan.width, y = Math.random()*fCan.height/2;
+                const col = `hsl(${Math.random()*360}, 100%, 60%)`;
+                let p = []; for(let i=0; i<30; i++) p.push({x,y,vx:Math.random()*4-2, vy:Math.random()*4-2, a:1});
+                function ani() {
+                    fCtx.fillStyle = 'rgba(5,5,5,0.1)'; fCtx.fillRect(0,0,fCan.width, fCan.height);
+                    p.forEach((pt, i)=>{
+                        pt.x+=pt.vx; pt.y+=pt.vy; pt.vy+=0.02; pt.a-=0.01;
+                        fCtx.globalAlpha = pt.a; fCtx.fillStyle = col;
+                        fCtx.beginPath(); fCtx.arc(pt.x, pt.y, 2, 0, 6.28); fCtx.fill();
+                        if(pt.a<=0) p.splice(i,1);
+                    });
+                    if(p.length>0) requestAnimationFrame(ani);
+                }
+                ani();
+            }, 500);
+        }
+
+        function startApp(n) { document.getElementById('bgm').play().catch(()=>{}); next(n); }
         function next(n) {
             document.querySelectorAll('.container').forEach(c => c.classList.remove('active'));
             document.getElementById('p' + n).classList.add('active');
-            document.getElementById('bgMusic').play().catch(()=>{});
-        }
-
-        function moveNo() {
-            const btn = document.getElementById('no-btn');
-            document.getElementById('tease').innerText = "No button nahi dabni chahiye! 😜";
-            btn.style.position = 'fixed';
-            btn.style.left = Math.random() * 70 + 15 + 'vw';
-            btn.style.top = Math.random() * 70 + 15 + 'vh';
-        }
-
-        let score = 0;
-        const boxMsgs = ["Teena, you are my world! 🌎", "Your smile is my favorite! 😊", "Forever Yours! 💖"];
-        function startGame(idx) {
-            score = 0; document.getElementById('score').innerText = score;
-            document.getElementById('game-overlay').style.display = 'block';
-            spawnHeart(idx);
-        }
-
-        function spawnHeart(idx) {
-            if(score >= 5) {
-                document.getElementById('game-overlay').style.display = 'none';
-                document.getElementById('game-msg').innerText = boxMsgs[idx];
-                return;
-            }
-            const h = document.createElement('div');
-            h.innerHTML = '❤️';
-            h.style.position = 'absolute';
-            h.style.fontSize = '50px';
-            h.style.left = Math.random() * 80 + 10 + '%';
-            h.style.top = Math.random() * 80 + 10 + '%';
-            h.style.cursor = 'pointer';
-            h.onclick = () => { score++; document.getElementById('score').innerText = score; h.remove(); spawnHeart(idx); };
-            document.getElementById('game-overlay').appendChild(h);
-        }
-
-        function celebrate() {
-            startFireworks();
-            setTimeout(() => next(5), 2000);
-        }
-
-        function unlock() {
-            let pass = prompt("Enter Password (Hint: Your Name):");
-            if(pass && pass.toLowerCase() === 'teena') {
-                document.getElementById('lock').style.display = 'none';
-                document.getElementById('letter').style.display = 'block';
-                startFireworks();
-            } else { alert("Try again, My Love!"); }
-        }
-
-        // Firecrackers Logic
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        function startFireworks() {
-            for(let i=0; i<150; i++) {
-                particles.push({
-                    x: canvas.width / 2, y: canvas.height / 2,
-                    sx: Math.random() * 8 - 4, sy: Math.random() * 8 - 4,
-                    size: Math.random() * 3 + 1, color: `hsl(${Math.random() * 360}, 100%, 60%)`
-                });
-            }
-            animate();
-        }
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach((p, i) => {
-                p.x += p.sx; p.y += p.sy; p.sy += 0.1;
-                ctx.fillStyle = p.color;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2); ctx.fill();
-                if(p.y > canvas.height) particles.splice(i, 1);
-            });
-            if(particles.length > 0) requestAnimationFrame(animate);
         }
     </script>
 </body>
